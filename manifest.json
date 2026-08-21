@@ -1,17 +1,18 @@
 {
-  "data_version": 20260821,
-  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v1.0.0/ferheng_remote.db.gz",
-  "sha256": "3dad801f6b4e291a588eba62fe29793a4b3173f65ba3d52796c9b4f3a2de8443",
-  "compressed_sha256": "367a170a78556f11f4e1ad397d357ff3964a22c7d0c8761ca9689dfeebd5a24e",
-  "size_bytes": 468389888,
-  "entry_count": 136926,
-  "generated_at": "2026-08-21T11:37:00Z",
+  "data_version": 2026082102,
+  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v1.1.0/ferheng_remote.db.gz",
+  "sha256": "aa553c3b71c78d4d3e5f2cf723f0e4d70805ba14ec360fa1c0f9189d37332b82",
+  "compressed_sha256": "217398a70dde86d6f256b238f1d9c802d4df11b9cf68c90ef463021659d5cbf8",
+  "size_bytes": 466427904,
+  "entry_count": 136021,
+  "generated_at": "2026-08-21T12:43:00Z",
   "scope": {
     "base_language": "ku",
     "base_language_label": "Kurmancî / Kuzey Kürtçesi",
     "target_languages": ["tr", "en", "de", "ckb", "zza"],
     "removed_languages": ["sdh", "lki"],
     "max_translations_per_target_language": 3,
-    "max_translations_per_entry": 15
+    "max_translations_per_entry": 15,
+    "public_source_labels": ["wiktionary.org", "freedict.org"]
   }
 }

@@ -8,6 +8,8 @@ The Android application reads [`manifest.json`](./manifest.json), downloads the 
 
 The current package contains 136,021 Kurmancî entries and 261,418 translations. Its Room schema identity hash is `fa304dcdc2f42557b84b04352c89c70f`.
 
+The app privacy policy is available in [`PRIVACY_POLICY.md`](./PRIVACY_POLICY.md).
+
 ## Public source labels
 
 The application displays only [Wiktionary](https://www.wiktionary.org/) and [FreeDict](https://freedict.org/) as public source labels. Raw payloads and source URLs remain internally preserved for data integrity and auditing, but additional source names are not listed in the application’s source description.

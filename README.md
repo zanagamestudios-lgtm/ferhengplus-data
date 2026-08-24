@@ -8,7 +8,7 @@ The Android application downloads a verified gzip SQLite package from a GitHub R
 
 ## Current package
 
-The current manifest is available at [`manifest.json`](./manifest.json). The v1.3.0 release asset is `ferheng_remote.db.gz`.
+The current manifest is available at [`manifest.json`](./manifest.json). The v1.3.1 release asset is `ferheng_remote.db.gz`.
 
 | Field | Value |
 |---|---:|
@@ -21,6 +21,7 @@ The current manifest is available at [`manifest.json`](./manifest.json). The v1.
 | Form rows | 2,887 |
 | Pronunciation rows | 1,574 |
 | Relation rows | 22,392 |
+| Entries with gender metadata | 2,241 |
 | Source snapshots | 1 (`wiktionary.org`) |
 | Maximum translations per target language | 3 |
 | Maximum translations per entry | 15 |

@@ -1,22 +1,27 @@
 {
-  "data_version": 2026082403,
-  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v1.3.1/ferheng_remote.db.gz",
-  "sha256": "c4f3ae20fea9be6177a811a3ae80a2893780f0baf046091b245aa3a50a07585d",
-  "compressed_sha256": "f0f24d11e78f3a6c72c87682e3be37c1bc08b1df06b54bf354aed68941abf426",
-  "size_bytes": 16584704,
-  "entry_count": 4263,
-  "generated_at": "2026-08-24T10:40:00Z",
+  "data_version": 2026082404,
+  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.0.0/ferheng_remote.db.gz",
+  "sha256": "f6d954082672e997deff167752266c8034e4f2ad94cafdf72ed4674062854c94",
+  "compressed_sha256": "9c6726304e6818f24766752079a8b89edf1885a17541ada035d84c66f46db7ff",
+  "size_bytes": 525795328,
+  "compressed_size_bytes": 126550315,
+  "entry_count": 227145,
+  "generated_at": "2026-08-24T16:20:00Z",
   "scope": {
     "base_language": "ku",
     "base_language_label": "Kurmancî / Kuzey Kürtçesi",
     "target_languages": ["tr", "en", "de", "ckb", "zza"],
     "removed_languages": ["sdh", "lki", "all non-ku source sections"],
+    "all_main_namespace_pages_scanned": 1036065,
+    "ku_language_sections_parsed": 227148,
+    "ku_entries_after_page_language_deduplication": 227145,
     "max_translations_per_target_language": 3,
     "max_translations_per_entry": 15,
-    "detail_fields": ["gender", "pronunciation", "senses", "examples", "forms", "etymology", "relations"],
+    "detail_fields": ["gender", "pronunciation", "senses", "examples", "forms", "etymology", "relations", "all_wiktionary_sections", "raw_wikitext"],
     "primary_source": "ku.wiktionary.org",
     "primary_source_url": "https://ku.wiktionary.org/wiki/Destp%C3%AAk",
+    "dump_source_url": "https://dumps.wikimedia.org/kuwiktionary/latest/kuwiktionary-latest-pages-articles.xml.bz2",
     "public_source_labels": ["ku.wiktionary.org"],
-    "source_policy": "Only ku.wiktionary.org page/revision data; no external dictionary, corpus, reverse merge, or user bridge"
+    "source_policy": "Only ku.wiktionary.org current XML page/revision data; no external dictionary, corpus, reverse merge, or user bridge"
   }
 }

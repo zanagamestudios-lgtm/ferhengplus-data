@@ -1,20 +1,22 @@
 {
-  "data_version": 2026082401,
-  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v1.2.0/ferheng_remote.db.gz",
-  "sha256": "31b4e750f6679a3eb0a3b01b474a482279e3536e5a54ce2b570a8519f8531c49",
-  "compressed_sha256": "317f894d74f9146414cf737035a169bc91bec35c4adf8fd9bb02ee812e3ebbd6",
-  "size_bytes": 465780736,
-  "entry_count": 136021,
-  "generated_at": "2026-08-24T09:00:00Z",
+  "data_version": 2026082402,
+  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v1.3.0/ferheng_remote.db.gz",
+  "sha256": "3ae77e83c7cd40999069f9b5386952ece5d107ef796d80b5ae2fc64b0c03d6b5",
+  "compressed_sha256": "f1ace5cf1100046ae442fd53df8a49992e7f4d2d3378890ddfb836bae214183a",
+  "size_bytes": 16584704,
+  "entry_count": 4263,
+  "generated_at": "2026-08-24T10:25:00Z",
   "scope": {
     "base_language": "ku",
     "base_language_label": "Kurmancî / Kuzey Kürtçesi",
     "target_languages": ["tr", "en", "de", "ckb", "zza"],
-    "removed_languages": ["sdh", "lki"],
+    "removed_languages": ["sdh", "lki", "all non-ku source sections"],
     "max_translations_per_target_language": 3,
     "max_translations_per_entry": 15,
     "detail_fields": ["gender", "pronunciation", "senses", "examples", "forms", "etymology", "relations"],
     "primary_source": "ku.wiktionary.org",
-    "public_source_labels": ["wiktionary.org", "freedict.org"]
+    "primary_source_url": "https://ku.wiktionary.org/wiki/Destp%C3%AAk",
+    "public_source_labels": ["ku.wiktionary.org"],
+    "source_policy": "Only ku.wiktionary.org page/revision data; no external dictionary, corpus, reverse merge, or user bridge"
   }
 }

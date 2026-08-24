@@ -1,11 +1,11 @@
 {
-  "data_version": 2026082102,
-  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v1.1.0/ferheng_remote.db.gz",
-  "sha256": "aa553c3b71c78d4d3e5f2cf723f0e4d70805ba14ec360fa1c0f9189d37332b82",
-  "compressed_sha256": "217398a70dde86d6f256b238f1d9c802d4df11b9cf68c90ef463021659d5cbf8",
-  "size_bytes": 466427904,
+  "data_version": 2026082401,
+  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v1.2.0/ferheng_remote.db.gz",
+  "sha256": "31b4e750f6679a3eb0a3b01b474a482279e3536e5a54ce2b570a8519f8531c49",
+  "compressed_sha256": "317f894d74f9146414cf737035a169bc91bec35c4adf8fd9bb02ee812e3ebbd6",
+  "size_bytes": 465780736,
   "entry_count": 136021,
-  "generated_at": "2026-08-21T12:43:00Z",
+  "generated_at": "2026-08-24T09:00:00Z",
   "scope": {
     "base_language": "ku",
     "base_language_label": "Kurmancî / Kuzey Kürtçesi",
@@ -13,6 +13,8 @@
     "removed_languages": ["sdh", "lki"],
     "max_translations_per_target_language": 3,
     "max_translations_per_entry": 15,
+    "detail_fields": ["gender", "pronunciation", "senses", "examples", "forms", "etymology", "relations"],
+    "primary_source": "ku.wiktionary.org",
     "public_source_labels": ["wiktionary.org", "freedict.org"]
   }
 }

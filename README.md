@@ -1,19 +1,26 @@
-# Ferheng+ Data
+# Ferheng+ Dictionary Data
 
-This repository publishes the downloadable dictionary package used by Ferheng+ Android.
+Ferheng+ is a Kurmancî-centered multilingual dictionary. Each entry is a Kurmancî headword and may contain up to three verified translations per target language: Türkçe (`tr`), English (`en`), Deutsch (`de`), Soranî (`ckb`) and Zazakî (`zza`). Lekî (`lki`) and Southern Kurdish (`sdh`) are excluded from the application data model.
 
-The dataset is **Kurmancî / Northern Kurdish centered**. Each entry has a Kurmancî headword and translations into Turkish, English, German, Sorani and Zazaki. Leki and Southern Kurdish (`lki`, `sdh`) are excluded. The cleaned merger keeps at most three unique translations per target language and at most fifteen translations per entry.
+The canonical detail model is based on structured `ku.wiktionary.org` / MediaWiki content. It preserves definitions, examples, pronunciation, grammatical forms, gender metadata, etymology and resolvable inline links so that users can move from one word to another inside a definition. FreeDict is used only as a supplemental translation source. The Android application downloads a verified gzip SQLite package from a GitHub Release; the database is not embedded in the APK.
 
-The Android application reads [`manifest.json`](./manifest.json), downloads the versioned gzip asset from the GitHub Release, verifies the compressed SHA-256, decompresses the SQLite database, verifies the uncompressed SHA-256, size and Room identity hash, and only then installs it.
+## Current package
 
-The current package contains 136,021 Kurmancî entries and 261,418 translations. Its Room schema identity hash is `fa304dcdc2f42557b84b04352c89c70f`.
+The current manifest is available at [`manifest.json`](./manifest.json). The v1.2.0 release asset is `ferheng_remote.db.gz`.
 
-The app privacy policy is available in [`PRIVACY_POLICY.md`](./PRIVACY_POLICY.md).
+- **Room schema:** v3
+- **Room identity hash:** `dfb9e345547fa7fb813ab302c82fbbd5`
+- **Kurmancî entries:** 136,021
+- **Translation rows:** 261,418
+- **Entries with gender metadata:** 2,289
+- **Inline relations with resolved targets:** 15,235
+- **Maximum translations per target language:** 3
+- **Maximum translations per entry:** 15
+- **Primary source:** [ku.wiktionary.org](https://ku.wiktionary.org/)
+- **Supplemental source:** [FreeDict](https://freedict.org/)
 
-## Public source labels
+## Verification
 
-The application displays only [Wiktionary](https://www.wiktionary.org/) and [FreeDict](https://freedict.org/) as public source labels. Raw payloads and source URLs remain internally preserved for data integrity and auditing, but additional source names are not listed in the application’s source description.
+The package is checked before publication for Room schema compatibility, Kurmancî-only entries, target-language validity, empty records, duplicate translations, FTS integrity, character-folded search, and resolvable relation targets. The public Android-facing source labels are intentionally limited to Wiktionary and FreeDict.
 
-## Data quality
-
-The supplied Zazaki corpus was processed as a separate input, normalized, deduplicated and cross-checked in both Zazaki-to-Turkish and Turkish-to-Zazaki directions before accepted translations were added to the Kurmancî-centered records. Empty, technically malformed and uncorroborated records were excluded. The final package enforces the three-translation-per-target-language cap.
+The privacy policy is available at [`PRIVACY_POLICY.md`](./PRIVACY_POLICY.md). It is a product-specific working draft and should be reviewed by qualified legal counsel before use as a final legal notice.

@@ -1,12 +1,12 @@
 {
-  "data_version": 2026082503,
-  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.1.0/ferheng_remote.db.gz",
-  "sha256": "a2e126f2d68277c1e9fae4d6d6ec9b86930be3c66e4e0b34551609af087a4ef0",
-  "compressed_sha256": "12955c472f5d916d4211b552ca4ab0875e1eb57f7850d437478ba2805d044a39",
-  "size_bytes": 510558208,
-  "compressed_size_bytes": 130825553,
+  "data_version": 2026082511,
+  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.2.0/ferheng_remote.db.gz",
+  "sha256": "2d2abb785336b003484b58b42eecd379c94424dffedda18a7d2f36a323c6a2f9",
+  "compressed_sha256": "9ee644fb5b9a2194f115d7de105ed7ab19313ddaf4dea224e84aaa42ee4097d2",
+  "size_bytes": 527749120,
+  "compressed_size_bytes": 128262131,
   "entry_count": 227145,
-  "generated_at": "2026-08-25T10:20:00Z",
+  "generated_at": "2026-08-25T11:58:38Z",
   "scope": {
     "base_language": "ku",
     "base_language_label": "Kurmancî / Kuzey Kürtçesi",
@@ -20,7 +20,12 @@
     "primary_source": "ku.wiktionary.org",
     "primary_source_url": "https://ku.wiktionary.org/wiki/Destp%C3%AAk",
     "dump_source_url": "https://dumps.wikimedia.org/kuwiktionary/latest/kuwiktionary-latest-pages-articles.xml.bz2",
-    "public_source_labels": ["ku.wiktionary.org"],
-    "source_policy": "Only ku.wiktionary.org current XML page/revision data; no external dictionary, corpus, reverse merge, or user bridge"
+    "public_source_labels": ["ku.wiktionary.org", "freedict.org"],
+    "entry_source_policy": "Every entry is a canonical Kurmancî entry from ku.wiktionary.org; FreeDict never creates standalone entries.",
+    "translation_source_policy": "FreeDict is secondary and fills only missing TR/EN/DE values after exact normalized Kurmancî headword matching; existing Wiktionary values are retained and each entry/target is capped at three values.",
+    "freedict_metadata_url": "https://freedict.org/freedict-database.json",
+    "freedict_download_api_url": "https://freedict.org/downloads/#api",
+    "freedict_license_policy": "Package-level licenses are retained in the build audit; kur-eng/kur-deu/kur-tur/deu-kur are GPL-2.0-or-later and eng-kur is CC BY-SA 3.0 according to the official package metadata.",
+    "freedict_selected_packages": ["kur-eng@1.2", "kur-deu@0.1.2", "kur-tur@0.1.2", "eng-kur@2025.11.23", "deu-kur@0.2.2"]
   }
 }

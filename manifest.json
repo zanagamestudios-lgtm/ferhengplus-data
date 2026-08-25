@@ -1,12 +1,12 @@
 {
-  "data_version": 2026082511,
+  "data_version": 2026082512,
   "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.2.0/ferheng_remote.db.gz",
-  "sha256": "2d2abb785336b003484b58b42eecd379c94424dffedda18a7d2f36a323c6a2f9",
-  "compressed_sha256": "9ee644fb5b9a2194f115d7de105ed7ab19313ddaf4dea224e84aaa42ee4097d2",
+  "sha256": "cc039b38f10c2a42a2b5a57a74a56245ce3be87e084ec16bb50fbeacecd307a3",
+  "compressed_sha256": "e1420ba1f4929c97ff59ea9dba1d180dc681b667e222b5c93890ce5b9403a1cd",
   "size_bytes": 527749120,
-  "compressed_size_bytes": 128262131,
+  "compressed_size_bytes": 128648060,
   "entry_count": 227145,
-  "generated_at": "2026-08-25T11:58:38Z",
+  "generated_at": "2026-08-25T12:07:06Z",
   "scope": {
     "base_language": "ku",
     "base_language_label": "Kurmancî / Kuzey Kürtçesi",

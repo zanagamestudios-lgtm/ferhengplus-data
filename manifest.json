@@ -1,12 +1,13 @@
 {
-  "data_version": 2026082512,
-  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.2.0/ferheng_remote.db.gz",
-  "sha256": "cc039b38f10c2a42a2b5a57a74a56245ce3be87e084ec16bb50fbeacecd307a3",
-  "compressed_sha256": "e1420ba1f4929c97ff59ea9dba1d180dc681b667e222b5c93890ce5b9403a1cd",
+  "data_version": 2026091201,
+  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.3.0/ferheng_remote.db.gz",
+  "sha256": "bb6e1ce3eaa1e5d1b0aede6c5658c0339c1a47ca3e74bf714ce4a132faad0b30",
+  "compressed_sha256": "63cc9d5ad714e80c1b2ea9a40c76a5efc36a52fbe956d37ea276af193f5075dc",
   "size_bytes": 527749120,
-  "compressed_size_bytes": 128648060,
+  "compressed_size_bytes": 128760799,
   "entry_count": 227145,
-  "generated_at": "2026-08-25T12:07:06Z",
+  "translation_count": 204577,
+  "generated_at": "2026-09-12T21:57:22Z",
   "scope": {
     "base_language": "ku",
     "base_language_label": "Kurmancî / Kuzey Kürtçesi",
@@ -22,10 +23,12 @@
     "dump_source_url": "https://dumps.wikimedia.org/kuwiktionary/latest/kuwiktionary-latest-pages-articles.xml.bz2",
     "public_source_labels": ["ku.wiktionary.org", "freedict.org"],
     "entry_source_policy": "Every entry is a canonical Kurmancî entry from ku.wiktionary.org; FreeDict never creates standalone entries.",
-    "translation_source_policy": "FreeDict is secondary and fills only missing TR/EN/DE values after exact normalized Kurmancî headword matching; existing Wiktionary values are retained and each entry/target is capped at three values.",
+    "translation_source_policy": "FreeDict is secondary and fills only missing TR/EN/DE values after exact normalized canonical Kurmancî headword matching; existing Wiktionary values are retained and each entry/target is capped at three values.",
     "freedict_metadata_url": "https://freedict.org/freedict-database.json",
     "freedict_download_api_url": "https://freedict.org/downloads/#api",
-    "freedict_license_policy": "Package-level licenses are retained in the build audit; kur-eng/kur-deu/kur-tur/deu-kur are GPL-2.0-or-later and eng-kur is CC BY-SA 3.0 according to the official package metadata.",
-    "freedict_selected_packages": ["kur-eng@1.2", "kur-deu@0.1.2", "kur-tur@0.1.2", "eng-kur@2025.11.23", "deu-kur@0.2.2"]
+    "freedict_selected_packages": ["kur-eng@1.2", "kur-deu@0.1.2", "kur-tur@0.1.2", "eng-kur@2025.11.23", "deu-kur@0.2.2"],
+    "freedict_rows_after_merge": 17884,
+    "freedict_license_policy": "Package-level licenses are retained in the build audit; selected packages are distributed only with their package license and attribution requirements.",
+    "quality_policy": "No orphan translations; no independent FreeDict entries; no more than three values per target language; only exact normalized canonical headword matches are accepted."
   }
 }

@@ -1,0 +1,11 @@
+{
+  "data_version": 2026091201,
+  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.3.0/ferheng_remote.db.zip",
+  "archive_sha256": "941a5d1389271ba63897c23b2a00245bf427235666e6e20899c8e932cb09f4ed",
+  "sha256": "bb6e1ce3eaa1e5d1b0aede6c5658c0339c1a47ca3e74bf714ce4a132faad0b30",
+  "size_bytes": 527749120,
+  "archive_size_bytes": 128760933,
+  "entry_count": 227145,
+  "translation_count": 204577,
+  "schema_version": 4
+}

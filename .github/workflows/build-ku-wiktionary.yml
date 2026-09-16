@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - scripts/rebuild-ku-wiktionary.py
+      - scripts/export-room-pack.py
       - .github/workflows/build-ku-wiktionary.yml
 
 permissions:
@@ -23,51 +24,123 @@ jobs:
           mkdir -p /tmp/enrich
           curl -L --fail --retry 5 -o /tmp/enrich/kuwiki.jsonl.gz \
             https://kaikki.org/kuwiktionary/raw-wiktextract-data.jsonl.gz
-      - name: Build SQLite
+      - name: Build web lemma pack
         run: python3 scripts/rebuild-ku-wiktionary.py --src /tmp/enrich/kuwiki.jsonl.gz --out ferheng.db
-      - name: Package and checksum
+      - name: Export Android Room pack
+        run: python3 scripts/export-room-pack.py --src ferheng.db --out ferheng_remote.db
+      - name: Package, checksum, manifests
         run: |
           gzip -n -kf ferheng.db
+          gzip -n -kf ferheng_remote.db
           mv ferheng.db.gz ferheng_web.db.gz
           python3 - <<'PY'
           import hashlib, json, os, sqlite3
-          db = sqlite3.connect("ferheng.db")
+          from datetime import datetime, timezone
+
           def sha(path):
               digest = hashlib.sha256()
               with open(path, "rb") as handle:
                   for chunk in iter(lambda: handle.read(1 << 20), b""):
                       digest.update(chunk)
               return digest.hexdigest()
+
+          web = sqlite3.connect("ferheng.db")
+          room = sqlite3.connect("ferheng_remote.db")
+          generated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          web_langs = dict(web.execute("select language_code, count(*) from entries group by 1"))
           meta = {
-              "data_version": 2026091702,
-              "tag": "v2.4.0",
-              "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.4.0/ferheng_web.db.gz",
-              "sha256": sha("ferheng.db"),
-              "compressed_sha256": sha("ferheng_web.db.gz"),
-              "size_bytes": os.path.getsize("ferheng.db"),
-              "compressed_size_bytes": os.path.getsize("ferheng_web.db.gz"),
-              "entry_count": db.execute("select count(*) from entries").fetchone()[0],
-              "translation_count": db.execute("select count(*) from translations").fetchone()[0],
-              "entries_by_language": dict(db.execute("select language_code, count(*) from entries group by 1")),
-              "generated_at": __import__("datetime").datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+              "data_version": 2026091703,
+              "tag": "v2.5.0",
+              "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.5.0/ferheng_remote.db.gz",
+              "web_database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.5.0/ferheng_web.db.gz",
+              "sha256": sha("ferheng_remote.db"),
+              "compressed_sha256": sha("ferheng_remote.db.gz"),
+              "size_bytes": os.path.getsize("ferheng_remote.db"),
+              "compressed_size_bytes": os.path.getsize("ferheng_remote.db.gz"),
+              "entry_count": room.execute("select count(*) from entries").fetchone()[0],
+              "translation_count": room.execute("select count(*) from translations").fetchone()[0],
+              "web": {
+                  "sha256": sha("ferheng.db"),
+                  "compressed_sha256": sha("ferheng_web.db.gz"),
+                  "size_bytes": os.path.getsize("ferheng.db"),
+                  "compressed_size_bytes": os.path.getsize("ferheng_web.db.gz"),
+                  "entry_count": web.execute("select count(*) from entries").fetchone()[0],
+                  "translation_count": web.execute("select count(*) from translations").fetchone()[0],
+                  "sense_count": web.execute("select count(*) from senses").fetchone()[0],
+                  "entries_by_language": web_langs,
+              },
+              "generated_at": generated,
+              "schema_version": 4,
               "scope": {
                   "base_language": "ku",
+                  "base_language_label": "Kurmancî / Kuzey Kürtçesi",
                   "target_languages": ["tr", "en", "de"],
+                  "entries_by_language": web_langs,
                   "primary_source": "ku.wiktionary.org",
                   "primary_source_url": "https://ku.wiktionary.org/wiki/Destp%C3%AAk",
                   "dump_source_url": "https://kaikki.org/kuwiktionary/raw-wiktextract-data.jsonl.gz",
+                  "public_source_labels": ["ku.wiktionary.org"],
                   "entry_source_policy": "One ku.wiktionary lemma page per search result. Foreign-language pages keep numbered Kurdish senses under a single heading. Inflected form-of records are aliases, not cards.",
                   "quality_policy": "ku.wiktionary.org only. No ferheng.org, FreeDict or Apertium rows.",
               },
           }
-          open("manifest.v2.4.0.json", "w", encoding="utf-8").write(json.dumps(meta, indent=2) + "\n")
+          expo = {
+              "data_version": 2026091703,
+              "database_url": meta["database_url"],
+              "archive_sha256": meta["compressed_sha256"],
+              "sha256": meta["sha256"],
+              "size_bytes": meta["size_bytes"],
+              "archive_size_bytes": meta["compressed_size_bytes"],
+              "entry_count": meta["entry_count"],
+              "translation_count": meta["translation_count"],
+              "schema_version": 4,
+          }
+          open("manifest.json", "w", encoding="utf-8").write(json.dumps(meta, indent=2) + "\n")
+          open("expo-manifest.json", "w", encoding="utf-8").write(json.dumps(expo, indent=2) + "\n")
+          open("manifest.v2.5.0.json", "w", encoding="utf-8").write(json.dumps(meta, indent=2) + "\n")
+          langs = web_langs
+          readme = "# Ferheng+ Dictionary Data\n\n"
+          readme += "Single source: [ku.wiktionary.org](https://ku.wiktionary.org/wiki/Destp%C3%AAk)\n"
+          readme += "via the [kaikki.org kuwiktionary wiktextract](https://kaikki.org/kuwiktionary/rawdata.html) (CC BY-SA 4.0).\n\n"
+          readme += "**Older packages (v1.0.0-v2.4.0) were deleted.** This tag is the only published dataset.\n\n"
+          readme += "Each search result is **one Wiktionary lemma page**. Turkish / English / German pages keep numbered Kurdish senses under a single heading.\n\n"
+          readme += "Inflected *form-of* records are aliases of the lemma, not separate cards.\n"
+          readme += "**ferheng.org, FreeDict and Apertium are not mixed in.**\n\n"
+          readme += "## Current package \u2014 v2.5.0\n\n"
+          readme += "| Pack | File | Use |\n|---|---|---|\n"
+          readme += "| Android Room v4 | `ferheng_remote.db.gz` | Existing Android app (KU entries only) |\n"
+          readme += "| Web lemma pack | `ferheng_web.db.gz` | Web app + Wiktionary-style grouping (KU/TR/EN/DE lemmas) |\n\n"
+          readme += "### Lemma counts (web pack)\n\n"
+          readme += f"| Language | Lemmas |\n|---|---:|\n| Kurmancî | {langs.get('ku', 0):,} |\n| Tirkî | {langs.get('tr', 0):,} |\n| English | {langs.get('en', 0):,} |\n| Deutsch | {langs.get('de', 0):,} |\n| **Total** | **{sum(langs.values()):,}** |\n\n"
+          readme += f"Android pack: {meta['entry_count']:,} Kurmancî lemmas, {meta['translation_count']:,} TR/EN/DE translations.\n\n"
+          readme += "Rebuild:\n\n```\npython3 scripts/rebuild-ku-wiktionary.py --src kuwiki.jsonl.gz --out ferheng.db\npython3 scripts/export-room-pack.py --src ferheng.db --out ferheng_remote.db\n```\n\n"
+          readme += "## Policy\n\n- One ku.wiktionary lemma page per search result.\n- Reverse lookup (TR/EN/DE \u2192 KU) uses the foreign-language page on ku.wiktionary.\n- No secondary dictionary rows.\n"
+          open("README.md", "w", encoding="utf-8").write(readme)
           PY
-      - name: Publish GitHub Release v2.4.0
+      - name: Replace GitHub release with v2.5.0
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release delete v2.4.0 --yes || true
-          gh release create v2.4.0 ferheng_web.db.gz manifest.v2.4.0.json \
+          set -euo pipefail
+          for tag in v2.4.0 v2.3.0 v2.2.0 v2.1.0 v2.0.0 v1.3.1 v1.3.0 v1.2.0 v1.1.0 v1.0.0; do
+            gh release delete "$tag" --cleanup-tag --yes || true
+          done
+          gh release create v2.5.0 \
+            ferheng_remote.db.gz ferheng_web.db.gz manifest.v2.5.0.json \
             --target "${GITHUB_SHA}" \
-            --title "Ferheng+ data v2.4.0 — ku.wiktionary.org only" \
-            --notes "$(cat manifest.v2.4.0.json)"
+            --title "Ferheng+ data v2.5.0 — ku.wiktionary.org only" \
+            --notes "$(cat manifest.v2.5.0.json)"
+      - name: Publish manifests on main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manifest.json expo-manifest.json README.md || true
+          if git diff --cached --quiet; then
+            echo "manifests already current"
+          else
+            git commit -m "v2.5.0: replace dataset with ku.wiktionary-only packs"
+            git push origin HEAD:main
+          fi

@@ -1,0 +1,73 @@
+name: Build ku.wiktionary pack
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/rebuild-ku-wiktionary.py
+      - .github/workflows/build-ku-wiktionary.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download ku.wiktionary wiktextract
+        run: |
+          mkdir -p /tmp/enrich
+          curl -L --fail --retry 5 -o /tmp/enrich/kuwiki.jsonl.gz \
+            https://kaikki.org/kuwiktionary/raw-wiktextract-data.jsonl.gz
+      - name: Build SQLite
+        run: python3 scripts/rebuild-ku-wiktionary.py --src /tmp/enrich/kuwiki.jsonl.gz --out ferheng.db
+      - name: Package and checksum
+        run: |
+          gzip -n -kf ferheng.db
+          mv ferheng.db.gz ferheng_web.db.gz
+          python3 - <<'PY'
+          import hashlib, json, os, sqlite3
+          db = sqlite3.connect("ferheng.db")
+          def sha(path):
+              digest = hashlib.sha256()
+              with open(path, "rb") as handle:
+                  for chunk in iter(lambda: handle.read(1 << 20), b""):
+                      digest.update(chunk)
+              return digest.hexdigest()
+          meta = {
+              "data_version": 2026091702,
+              "tag": "v2.4.0",
+              "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.4.0/ferheng_web.db.gz",
+              "sha256": sha("ferheng.db"),
+              "compressed_sha256": sha("ferheng_web.db.gz"),
+              "size_bytes": os.path.getsize("ferheng.db"),
+              "compressed_size_bytes": os.path.getsize("ferheng_web.db.gz"),
+              "entry_count": db.execute("select count(*) from entries").fetchone()[0],
+              "translation_count": db.execute("select count(*) from translations").fetchone()[0],
+              "entries_by_language": dict(db.execute("select language_code, count(*) from entries group by 1")),
+              "generated_at": __import__("datetime").datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+              "scope": {
+                  "base_language": "ku",
+                  "target_languages": ["tr", "en", "de"],
+                  "primary_source": "ku.wiktionary.org",
+                  "primary_source_url": "https://ku.wiktionary.org/wiki/Destp%C3%AAk",
+                  "dump_source_url": "https://kaikki.org/kuwiktionary/raw-wiktextract-data.jsonl.gz",
+                  "entry_source_policy": "One ku.wiktionary lemma page per search result. Foreign-language pages keep numbered Kurdish senses under a single heading. Inflected form-of records are aliases, not cards.",
+                  "quality_policy": "ku.wiktionary.org only. No ferheng.org, FreeDict or Apertium rows.",
+              },
+          }
+          open("manifest.v2.4.0.json", "w", encoding="utf-8").write(json.dumps(meta, indent=2) + "\n")
+          PY
+      - name: Publish GitHub Release v2.4.0
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete v2.4.0 --yes || true
+          gh release create v2.4.0 ferheng_web.db.gz manifest.v2.4.0.json \
+            --target "${GITHUB_SHA}" \
+            --title "Ferheng+ data v2.4.0 — ku.wiktionary.org only" \
+            --notes "$(cat manifest.v2.4.0.json)"

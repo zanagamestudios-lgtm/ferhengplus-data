@@ -1,29 +1,51 @@
 {
-  "data_version": 2026091702,
-  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.4.0/ferheng_web.db.gz",
-  "android_database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.3.0/ferheng_remote.db.gz",
-  "sha256": "acd58b51062d38333f74934256bd4baf81341fa5e41e2e62ad17e3012517bcf4",
-  "compressed_sha256": "c68792f3c2bee111e74e00f3be54e3de843e70f4b0a3698cd79950d77d1ab143",
-  "size_bytes": 182517760,
-  "compressed_size_bytes": 64818196,
-  "entry_count": 281548,
-  "translation_count": 641974,
-  "sense_count": 350576,
-  "generated_at": "2026-09-16T22:47:00Z",
+  "data_version": 2026091703,
+  "tag": "v2.5.0",
+  "database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.5.0/ferheng_remote.db.gz",
+  "web_database_url": "https://github.com/zanagamestudios-lgtm/ferhengplus-data/releases/download/v2.5.0/ferheng_web.db.gz",
+  "sha256": "14a3029f63603ad37fbd2f3deea0f1a2bb25ffa369d851a9699fa112ec188775",
+  "compressed_sha256": "d8ea922eda634ef134f4773f7e3e4dc22c7c434769aab639cc8998dfa4531bd7",
+  "size_bytes": 188502016,
+  "compressed_size_bytes": 75468383,
+  "entry_count": 119926,
+  "translation_count": 260916,
+  "web": {
+    "sha256": "4fbc7315c94929aa93d21fb5793518116172d477978b4650c3462d72f01ab676",
+    "compressed_sha256": "5d3ccec429d78f76a36d0c42d67a5968d3f57852ecfa177b3d1eb459bce952a3",
+    "size_bytes": 165556224,
+    "compressed_size_bytes": 58035657,
+    "entry_count": 281548,
+    "translation_count": 641863,
+    "sense_count": 350576,
+    "entries_by_language": {
+      "de": 28319,
+      "en": 65577,
+      "ku": 119926,
+      "tr": 67726
+    }
+  },
+  "generated_at": "2026-09-16T23:07:47Z",
+  "schema_version": 4,
   "scope": {
     "base_language": "ku",
-    "base_language_label": "Kurmancî / Kuzey Kürtçesi",
-    "target_languages": ["tr", "en", "de"],
+    "base_language_label": "Kurmanc\u00ee / Kuzey K\u00fcrt\u00e7esi",
+    "target_languages": [
+      "tr",
+      "en",
+      "de"
+    ],
     "entries_by_language": {
-      "ku": 119926,
-      "tr": 67726,
+      "de": 28319,
       "en": 65577,
-      "de": 28319
+      "ku": 119926,
+      "tr": 67726
     },
     "primary_source": "ku.wiktionary.org",
     "primary_source_url": "https://ku.wiktionary.org/wiki/Destp%C3%AAk",
     "dump_source_url": "https://kaikki.org/kuwiktionary/raw-wiktextract-data.jsonl.gz",
-    "public_source_labels": ["ku.wiktionary.org"],
+    "public_source_labels": [
+      "ku.wiktionary.org"
+    ],
     "entry_source_policy": "One ku.wiktionary lemma page per search result. Foreign-language pages keep numbered Kurdish senses under a single heading. Inflected form-of records are aliases, not cards.",
     "quality_policy": "ku.wiktionary.org only. No ferheng.org, FreeDict or Apertium rows."
   }

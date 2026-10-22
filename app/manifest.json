@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "version": "2.5.0",
+  "dataVersion": 2026091703,
+  "generatedAt": "2026-10-22T19:14:14Z",
+  "entryCount": 119926,
+  "translationCount": 260916,
+  "dictionaryUrl": "https://raw.githubusercontent.com/zanagamestudios-lgtm/ferhengplus-data/main/app/dictionary.json.gz",
+  "compressedBytes": 8311944,
+  "compressedSha256": "d0abf925fbfa661b47592b246d9a1d9af48088ab0c1d4a140b2305382c5d89fa",
+  "rawBytes": 41989887,
+  "rawSha256": "27e92db32da6d13aca7eee1e70565be45bb4462245cd362e40e5e7028f3c462f",
+  "license": "CC BY-SA 4.0",
+  "source": "https://ku.wiktionary.org"
+}
